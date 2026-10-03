@@ -1,0 +1,23 @@
+{
+  "version": "V1.0-SINGLE-FILE",
+  "checks": {
+    "doctype": true,
+    "single_canvas": true,
+    "no_img_tags": true,
+    "no_background_images": true,
+    "three_jobs": true,
+    "six_npcs": true,
+    "phone_apps": true,
+    "error_handlers": true,
+    "integrity_watch": true,
+    "collision": true,
+    "camera": true,
+    "touch_controls": true
+  },
+  "node_syntax": {
+    "available": true,
+    "ok": true,
+    "stderr": ""
+  },
+  "file_bytes": 28470
+}
