@@ -1,0 +1,14 @@
+{
+  "build": "V6 Visual Overhaul",
+  "client_js_syntax": true,
+  "client_error": "",
+  "server_js_syntax": true,
+  "server_error": "",
+  "embedded_png_assets": 12,
+  "building_facades": 8,
+  "npc_directions": 4,
+  "npc_animation_frames": 4,
+  "vehicle_types": 6,
+  "props_variants": 16,
+  "visual_overhaul": "full renderer replacement: ground, architecture, characters, props, traffic, lighting, rain"
+}
