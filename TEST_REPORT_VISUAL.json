@@ -1,0 +1,15 @@
+{
+  "version": "V4.1 VISUAL PRODUCTION PASS",
+  "checks": {
+    "html": true,
+    "canvas": true,
+    "no_img": true,
+    "pixel_asset_functions": true,
+    "8_buildings": true,
+    "8_npcs": true,
+    "chat_ai": true,
+    "integrity": true,
+    "javascript_syntax": true
+  },
+  "note": "Visual layer rebuilt as modular pixel-art Canvas assets: textured ground, facades, signs, awnings, windows, props, scooters, street furniture, utility wires, rain, day/night, animated characters."
+}

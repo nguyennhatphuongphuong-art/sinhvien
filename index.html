@@ -2,322 +2,226 @@
 <html lang="vi">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<title>ĐỜI NÀY CÓ GÌ VUI?</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<title>ĐỜI NÀY CÓ GÌ VUI? — V2.0</title>
 <style>
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#101419;color:#fff;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-body{touch-action:none}canvas{display:block;width:100%;height:100%;image-rendering:pixelated}
-#boot{position:fixed;inset:0;z-index:99;display:flex;align-items:center;justify-content:center;background:#171b1f}
-#boot div{text-align:center;padding:25px;color:#f5e4c5}#boot h1{font-size:28px;line-height:1;margin:0 0 10px}
-#hud{position:fixed;top:max(10px,env(safe-area-inset-top));left:10px;z-index:10;display:none}
-.card{background:#20262bdd;border:2px solid #ffffff25;border-radius:12px;box-shadow:0 6px 20px #0006;padding:8px 10px;min-width:195px;font-size:12px}
-.row{display:flex;justify-content:space-between;gap:15px}.row b{color:#ffe6a7}
-#phoneBtn{position:fixed;right:12px;top:max(12px,env(safe-area-inset-top));z-index:11;display:none;width:52px;height:52px;border:0;border-radius:14px;background:#20262ddd;color:#fff;font-size:25px}
-#controls{position:fixed;left:12px;bottom:max(14px,env(safe-area-inset-bottom));z-index:12;display:none;width:180px;height:125px}
-.ctrl{position:absolute;width:55px;height:55px;border:2px solid #fff3;border-radius:16px;background:#20262ddd;color:#fff;font-size:22px}
-#up{left:62px}#left{left:0;top:62px}#down{left:62px;top:62px}#right{left:124px;top:62px}
-#action{position:fixed;right:15px;bottom:max(20px,env(safe-area-inset-bottom));z-index:12;display:none;width:78px;height:78px;border:3px solid #fff7;border-radius:50%;background:#d59a47;font-weight:900}
-#panel{position:fixed;left:10px;right:10px;bottom:max(10px,env(safe-area-inset-bottom));z-index:30;display:none}
-.inner{background:#f4ead8;color:#292522;border:3px solid #303236;border-radius:15px;padding:13px;box-shadow:0 12px 35px #0009;max-height:60vh;overflow:auto}
-.close{float:right;border:0;border-radius:7px;background:#303236;color:#fff;padding:5px 9px}
-.title{font-size:18px;font-weight:900;margin-bottom:5px}.body{font-size:14px;line-height:1.45;white-space:pre-line}
-.choice{display:block;width:100%;margin-top:8px;padding:10px;text-align:left;border:2px solid #655b4e;border-radius:10px;background:#fff8e9;color:#292522}
-#phone{position:fixed;inset:0;z-index:40;display:none;align-items:center;justify-content:center;background:#101419}
-.phoneShell{width:min(380px,92vw);height:min(760px,91vh);background:#eee8dc;border:7px solid #24282c;border-radius:30px;overflow:hidden;color:#242321;display:flex;flex-direction:column}
-.phoneTop{height:52px;background:#24282c;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 14px;font-size:11px}
-.phoneHome{flex:1;overflow:auto}.grid{padding:18px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.app{min-height:82px;border:0;border-radius:15px;background:#fff;box-shadow:0 3px 10px #0002;font-weight:800;color:#2a2926}.app span{display:block;font-size:28px;margin-bottom:5px}
-.page{display:none;flex:1;overflow:auto;background:#f3efe7}.page.on{display:block}
-.head{padding:11px 14px;background:#fff;border-bottom:1px solid #ddd;font-weight:900;display:flex;justify-content:space-between}
-.item,.feed,.profile{background:#fff;margin:8px;border-radius:12px;padding:11px;box-shadow:0 2px 8px #0001;color:#252321}
-.item button,.profile button{margin-top:7px;border:0;border-radius:8px;background:#2e6d60;color:#fff;padding:8px 10px}
-.feed p{margin:6px 0;line-height:1.35}.profile{text-align:center}.avatar{width:92px;height:92px;margin:auto;border-radius:50%;background:#bb8068;display:flex;align-items:center;justify-content:center;font-size:45px}
-#toast{position:fixed;left:50%;top:18%;transform:translateX(-50%);z-index:80;display:none;background:#20262b;color:#fff;border:2px solid #fff3;border-radius:11px;padding:9px 13px;box-shadow:0 8px 24px #0007;text-align:center}
-#debug{position:fixed;right:8px;bottom:8px;z-index:90;display:none;max-width:94vw;max-height:35vh;overflow:auto;background:#2a1013;color:#ffd9d9;border:2px solid #e65b64;border-radius:9px;padding:8px;font:11px/1.35 monospace;white-space:pre-wrap}
-#debugBtn{position:fixed;right:8px;bottom:8px;z-index:91;display:none;background:#7d2e35;color:#fff;border:0;border-radius:8px;padding:7px;font-size:11px}
+*{box-sizing:border-box}html,body{margin:0;background:#101216;color:#f6f1e8;font-family:system-ui,-apple-system,Segoe UI,sans-serif;height:100%;overflow:hidden}
+#game{width:min(100vw,540px);height:100%;margin:auto;position:relative;background:#1d2520;overflow:hidden}
+canvas{width:100%;height:100%;display:block;image-rendering:pixelated}
+#hud{position:absolute;top:10px;left:10px;right:10px;display:flex;gap:6px;flex-wrap:wrap;pointer-events:none}
+.pill{background:#171a19dd;border:1px solid #ffffff22;border-radius:999px;padding:6px 9px;font-size:12px;backdrop-filter:blur(5px)}
+#actions{position:absolute;left:10px;right:10px;bottom:12px;display:flex;justify-content:space-between;align-items:end;pointer-events:none}
+.pad{display:grid;grid-template-columns:44px 44px 44px;grid-template-rows:44px 44px 44px;gap:4px;pointer-events:auto}
+.btn{border:1px solid #ffffff22;background:#171a19dd;color:#fff;border-radius:12px;font-size:18px;min-width:44px;min-height:44px}
+.pad .up{grid-column:2}.pad .left{grid-column:1;grid-row:2}.pad .down{grid-column:2;grid-row:2}.pad .right{grid-column:3;grid-row:2}
+.quick{display:flex;gap:7px;pointer-events:auto;flex-wrap:wrap;justify-content:end;max-width:190px}
+.quick .btn{font-size:13px;padding:0 11px}
+#panel{position:absolute;inset:9% 5% 9%;background:#151816f5;border:1px solid #ffffff25;border-radius:20px;display:none;flex-direction:column;overflow:hidden;box-shadow:0 18px 50px #0009}
+#panel.show{display:flex}.panelHead{padding:14px 16px;border-bottom:1px solid #ffffff16;display:flex;justify-content:space-between;align-items:center}
+.panelTitle{font-weight:800}.panelBody{padding:14px;overflow:auto}.card{background:#202522;border:1px solid #ffffff12;border-radius:15px;padding:12px;margin-bottom:9px}
+.row{display:flex;gap:8px;align-items:center;justify-content:space-between}.muted{color:#aab2aa;font-size:12px}.gold{color:#ffd66b}.danger{color:#ff9b9b}
+.action{background:#d8b56b;color:#17130b;border:0;border-radius:10px;padding:9px 12px;font-weight:800}
+input,textarea{width:100%;background:#0e1110;color:#fff;border:1px solid #ffffff20;border-radius:10px;padding:10px;font:inherit}
+textarea{min-height:70px;resize:none}.chat{display:flex;flex-direction:column;gap:8px}.msg{max-width:84%;padding:9px 11px;border-radius:14px;line-height:1.35;font-size:13px}.me{align-self:end;background:#365342}.npc{align-self:start;background:#292d2a}.smallbtn{border:1px solid #ffffff18;background:#252a27;color:#fff;border-radius:9px;padding:7px 9px}
+#toast{position:absolute;left:50%;top:68px;transform:translateX(-50%);background:#1118;color:#fff;padding:9px 13px;border-radius:12px;font-size:12px;opacity:0;pointer-events:none;transition:.2s;z-index:20}
+#toast.on{opacity:1}.debug{position:absolute;right:8px;bottom:4px;color:#fff8;font:9px monospace;pointer-events:none}
+@media (min-width:700px){#game{height:96vh;margin-top:2vh;border-radius:24px;box-shadow:0 20px 70px #0008}}
 </style>
 </head>
 <body>
-<div id="boot"><div><h1>ĐỜI NÀY<br>CÓ GÌ VUI?</h1><div>Đang dựng khu phố...</div></div></div>
-<canvas id="game" width="360" height="640"></canvas>
-
-<div id="hud"><div class="card">
-<div class="row"><span>Ngày <b id="day">01</b></span><span id="clock">07:30</span></div>
-<div class="row"><span>💰 <b id="money">420.000đ</b></span><span>⚡ <b id="energy">100</b></span></div>
-<div class="row"><span>🙂 <b id="mood">70</b></span><span>📍 <b id="place">Phòng trọ</b></span></div>
-</div></div>
-<button id="phoneBtn">📱</button>
-
-<div id="controls">
-<button class="ctrl" id="up">▲</button><button class="ctrl" id="left">◀</button>
-<button class="ctrl" id="down">▼</button><button class="ctrl" id="right">▶</button>
+<div id="game">
+<canvas id="c" width="540" height="960"></canvas>
+<div id="hud">
+ <div class="pill" id="day">Ngày 1 · 07:30</div><div class="pill gold" id="money">1.000.000đ</div>
+ <div class="pill" id="energy">⚡ 82</div><div class="pill" id="mood">🙂 60</div><div class="pill" id="place">Phòng trọ</div>
 </div>
-<button id="action">TƯƠNG<br>TÁC</button>
-
-<div id="panel"><div class="inner"><button class="close" id="closePanel">Đóng</button><div class="title" id="panelTitle"></div><div class="body" id="panelBody"></div><div id="choices"></div></div></div>
-
-<div id="phone"><div class="phoneShell">
-<div class="phoneTop"><span id="phoneTime">07:30</span><b>ĐIỆN THOẠI</b><span>🔋78%</span></div>
-<div id="home" class="phoneHome"><div class="grid">
-<button class="app" data-app="msg"><span>💬</span>Tin nhắn</button>
-<button class="app" data-app="jobs"><span>💼</span>Việc làm</button>
-<button class="app" data-app="social"><span>📱</span>Mạng xã hội</button>
-<button class="app" data-app="dating"><span>❤️</span>Hẹn hò</button>
-<button class="app" data-app="shop"><span>🛒</span>Cửa hàng</button>
-<button class="app" data-app="close"><span>🏠</span>Đóng</button>
-</div></div>
-<div id="page" class="page"></div>
-</div></div>
-
-<div id="toast"></div><div id="debug"></div><button id="debugBtn">DEBUG</button>
-
+<div id="actions">
+ <div class="pad"><button class="btn up">▲</button><button class="btn left">◀</button><button class="btn down">▼</button><button class="btn right">▶</button></div>
+ <div class="quick"><button class="btn" id="phone">📱 Điện thoại</button><button class="btn" id="interact">◎ Tương tác</button><button class="btn" id="home">⌂ Về trọ</button></div>
+</div>
+<div id="toast"></div>
+<div id="panel"><div class="panelHead"><div class="panelTitle" id="ptitle">Điện thoại</div><button class="smallbtn" id="close">Đóng</button></div><div class="panelBody" id="pbody"></div></div>
+<div class="debug" id="debug"></div>
+</div>
 <script>
-"use strict";
-const VERSION="V1.0-SINGLE-FILE";
-const canvas=document.getElementById("game"),ctx=canvas.getContext("2d",{alpha:false});
-ctx.imageSmoothingEnabled=false;
-const $=id=>document.getElementById(id);
-
-const ERR={items:[]};
-function fail(e,where="runtime"){
- const s=`[${new Date().toLocaleTimeString()}] ${where}: ${e?.stack||e}`;
- ERR.items.push(s);console.error(s);$("debug").textContent=ERR.items.slice(-20).join("\n\n");$("debugBtn").style.display="block";
-}
-window.addEventListener("error",e=>fail(e.error||e.message,"window"));
-window.addEventListener("unhandledrejection",e=>fail(e.reason,"promise"));
-function safe(fn,where){try{return fn()}catch(e){fail(e,where)}}
-function assert(v,msg){if(!v)throw new Error("ASSERT: "+msg)}
-
-const WORLD={w:1120,h:1680};
-const state={day:1,minutes:450,money:420000,energy:100,mood:70,job:null,inventory:new Set(["phone_old"]),memories:new Set(),flags:{}};
-const player={x:160,y:330,speed:2.1,anim:0};
-const cam={x:0,y:0};
-const keys={up:false,down:false,left:false,right:false};
-let panel=false,phone=false,last=performance.now(),frame=0;
-
+(()=>{"use strict";
+const c=document.getElementById("c"),x=c.getContext("2d");x.imageSmoothingEnabled=false;
+const W=540,H=960, clamp=(v,a,b)=>Math.max(a,Math.min(b,v)), money=n=>n.toLocaleString("vi-VN")+"đ";
+const S={day:1,mins:450,money:1000000,energy:82,mood:60,place:"room",rain:false,job:null,rel:{mai:18,linh:12,khoa:8,nam:5},messages:{mai:[],linh:[],khoa:[],nam:[]},inventory:["phone"],flags:{},player:{x:270,y:760},errors:0};
+const npc=[
+{id:"mai",name:"Mai",x:145,y:300,home:"street",tone:"thẳng, tinh, hay cà khịa, nhưng biết quan tâm",color:"#d28c78"},
+{id:"linh",name:"Linh",x:405,y:500,home:"cafe",tone:"điềm, hài hước, hơi khó đoán, nói chuyện thông minh",color:"#8da7c7"},
+{id:"khoa",name:"Khoa",x:115,y:590,home:"rice",tone:"vui tính, nhiều chuyện, thực tế",color:"#9fbc77"},
+{id:"nam",name:"Nam",x:420,y:260,home:"office",tone:"ít nói, khô hài, hay than công việc",color:"#b6a27b"},
+{id:"sau",name:"Chú Sáu",x:95,y:420,home:"street",tone:"người lớn thực tế, nói chuyện đời, châm biếm nhẹ",color:"#9c8b78"},
+{id:"lan",name:"Cô Lan",x:440,y:760,home:"school",tone:"thẳng thắn, vui vẻ, hay nhắc sinh viên",color:"#d19b77"},
+{id:"bao",name:"Bảo",x:255,y:540,home:"street",tone:"tỉnh bơ, mê game, hơi lười nhưng hài hước",color:"#8a9f91"},
+{id:"vy",name:"Vy",x:430,y:330,home:"street",tone:"sắc sảo, hài hước, thích hỏi ngược",color:"#b891b0"}
+];
 const buildings=[
-{id:"room",x:55,y:175,w:225,h:250,tag:"PHÒNG TRỌ",title:"Dãy phòng trọ"},
-{id:"school",x:735,y:165,w:295,h:235,tag:"ĐẠI HỌC",title:"Trường đại học"},
-{id:"rice",x:355,y:555,w:220,h:185,tag:"CƠM",title:"Quán cơm bình dân"},
-{id:"shop",x:820,y:565,w:205,h:185,tag:"CỬA HÀNG",title:"Cửa hàng tiện lợi"},
-{id:"office",x:55,y:1125,w:260,h:250,tag:"VĂN PHÒNG",title:"Văn phòng"},
-{id:"cafe",x:720,y:1070,w:250,h:205,tag:"CÀ PHÊ",title:"Quán cà phê"},
-{id:"park",x:400,y:1250,w:250,h:230,tag:"CÔNG VIÊN",title:"Công viên"}
+{id:"room",x:25,y:675,w:150,h:220,label:"PHÒNG TRỌ",door:[90,890],col:"#9b785d"},
+{id:"school",x:25,y:80,w:175,h:145,label:"TRƯỜNG HỌC",door:[115,225],col:"#7e9a85"},
+{id:"rice",x:225,y:80,w:135,h:145,label:"QUÁN CƠM",door:[292,225],col:"#b47f59"},
+{id:"office",x:385,y:80,w:130,h:145,label:"VĂN PHÒNG",door:[450,225],col:"#7d8791"},
+{id:"shop",x:215,y:275,w:125,h:110,label:"TẠP HÓA",door:[278,385],col:"#9b9a6e"},
+{id:"cafe",x:365,y:360,w:150,h:125,label:"CÀ PHÊ",door:[440,485],col:"#8d6d61"},
+{id:"park",x:25,y:280,w:165,h:180,label:"CÔNG VIÊN",door:[105,460],col:"#628b62"},
+{id:"bus",x:385,y:540,w:130,h:85,label:"TRẠM XE",door:[450,625],col:"#6f7771"}
 ];
-
-const npcs=[
-{id:"mai",x:320,y:510,name:"Mai",type:"student",line:"Mai: “Mai kiểm tra mà tối nay mình vẫn chưa học gì.”"},
-{id:"khoa",x:615,y:515,name:"Khoa",type:"shipper",line:"Khoa: “Đợi đơn tiếp theo thôi. Hôm nay hơi vắng.”"},
-{id:"lan",x:680,y:825,name:"Cô Lan",type:"vendor",line:"Cô Lan: “Ăn gì thì ăn, nhớ ăn cho no rồi tính tiếp.”"},
-{id:"nam",x:530,y:1175,name:"Nam",type:"office",line:"Nam: “Mới sáng mà email đã dài hơn cuộc đời.”"},
-{id:"sau",x:670,y:1410,name:"Chú Sáu",type:"old",line:"Chú Sáu: “Hồi bằng tuổi cháu, chú cũng nghĩ mình sẽ khác.”"},
-{id:"linh",x:900,y:970,name:"Linh",type:"date",line:"Linh: “Đi dạo một chút không?”"}
-];
-
-const jobs=[
-{id:"ship",icon:"🛵",name:"Chạy giao hàng",pay:35000,mins:150,desc:"Một ca được mô phỏng bằng thời gian và vài sự kiện ngắn."},
-{id:"rice",icon:"🍚",name:"Phục vụ quán cơm",pay:90000,mins:180,desc:"Phục vụ bàn, dọn dẹp và nghe khách kể chuyện."},
-{id:"office",icon:"💻",name:"Nhân viên văn phòng",pay:140000,mins:240,desc:"Ca part-time: email, hồ sơ, máy lạnh và deadline."}
-];
-const shopItems=[
-{id:"food",icon:"🍜",name:"Mì + nước",price:25000,desc:"+12 năng lượng, +4 tâm trạng."},
-{id:"coffee",icon:"☕",name:"Cà phê",price:25000,desc:"+8 năng lượng, +6 tâm trạng."},
-{id:"umbrella",icon:"☂️",name:"Ô",price:60000,desc:"Ngày mưa sẽ bớt khổ."},
-{id:"raincoat",icon:"🧥",name:"Áo mưa",price:45000,desc:"Một thứ rất hữu ích ở thành phố."},
-{id:"charger",icon:"🔌",name:"Sạc điện thoại",price:80000,desc:"Không để điện thoại chết giữa ngày."},
-{id:"tee",icon:"👕",name:"Áo thun mới",price:120000,desc:"Đổi ngoại hình, không tăng sức mạnh."},
-{id:"phone_good",icon:"📱",name:"Điện thoại tốt hơn",price:650000,desc:"Mở thêm cơ hội việc làm."}
-];
-const dates=[
-{id:"linh",name:"Linh",age:20,job:"Sinh viên",bio:"Thích cà phê, đi dạo và những người nói chuyện thật.",emoji:"👩🏻"},
-{id:"trang",name:"Trang",age:21,job:"Nhân viên part-time",bio:"Không thích ghost. Thích người đúng giờ.",emoji:"👩🏻‍🦰"},
-{id:"vy",name:"Vy",age:20,job:"Sinh viên thiết kế",bio:"Hay thức khuya, thích nhạc và ảnh đường phố.",emoji:"👩🏻‍🎨"},
-{id:"anh",name:"Anh",age:22,job:"Thực tập sinh",bio:"Cuối tuần thích tìm quán mới.",emoji:"👩🏻‍💻"}
-];
-
-function money(n){return n.toLocaleString("vi-VN")+"đ"}
-function time(){return `${String(Math.floor(state.minutes/60)%24).padStart(2,"0")}:${String(state.minutes%60).padStart(2,"0")}`}
-function clamp(v,a,b){return Math.max(a,Math.min(b,v))}
-function toast(s){const e=$("toast");e.textContent=s;e.style.display="block";clearTimeout(toast.t);toast.t=setTimeout(()=>e.style.display="none",1700)}
-function spend(n){if(state.money<n){toast("Không đủ tiền.");return false}state.money-=n;return true}
-function earn(n){state.money+=n;toast("+"+money(n))}
-function advance(m){state.minutes+=m;if(state.minutes>=1440){state.day++;state.minutes=450;state.energy=100;state.mood=clamp(state.mood+4,0,100);player.x=160;player.y=330;toast("Một ngày nữa trôi qua.")}}
-function stats(){ $("day").textContent=String(state.day).padStart(2,"0");$("clock").textContent=time();$("phoneTime").textContent=time();$("money").textContent=money(state.money);$("energy").textContent=Math.round(state.energy);$("mood").textContent=Math.round(state.mood); }
-function remember(s){state.memories.add(s)}
-
-function openPanel(title,body,choices=[]){
- panel=true;$("panelTitle").textContent=title;$("panelBody").textContent=body;$("choices").innerHTML="";
- choices.forEach(c=>{const b=document.createElement("button");b.className="choice";b.textContent=c.label;b.onclick=()=>safe(()=>{c.action();closePanel()},"choice");$("choices").appendChild(b)});
- $("panel").style.display="block";
+let keys={};
+const near=(a,b,d=55)=>Math.hypot(a.x-b.x,a.y-b.y)<d;
+function toast(t){let e=document.getElementById("toast");e.textContent=t;e.classList.add("on");clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove("on"),1800)}
+function timeStr(){let h=Math.floor(S.mins/60)%24,m=S.mins%60;return String(h).padStart(2,"0")+":"+String(m).padStart(2,"0")}
+function advance(n){S.mins+=n;S.energy=clamp(S.energy-Math.ceil(n/28),0,100); if(S.mins>=1380){S.day++;S.mins=450;S.energy=82;S.mood=clamp(S.mood+5,0,100);S.place="room";S.player.x=270;S.player.y=760;toast("Một ngày nữa bắt đầu.");} save()}
+function save(){try{localStorage.setItem("dncv_state",JSON.stringify(S))}catch{}}
+function load(){try{let z=JSON.parse(localStorage.getItem("dncv_state"));if(z&&z.player)Object.assign(S,z)}catch{}}
+function buildingAt(px,py){return buildings.find(b=>px>b.x&&px<b.x+b.w&&py>b.y&&py<b.y+b.h)}
+function pxRect(px,py,w,h,c){x.fillStyle=c;x.fillRect(Math.round(px),Math.round(py),Math.round(w),Math.round(h))}
+function text(txt,px,py,size=9,c="#f5e4bc",align="center"){x.fillStyle=c;x.font=`bold ${size}px monospace`;x.textAlign=align;x.fillText(txt,px,py)}
+function tileNoise(px,py,w,h,base,seed=1){pxRect(px,py,w,h,base);for(let i=0;i<Math.floor(w*h/220);i++){let xx=px+((i*37+seed*13)%Math.max(1,w)),yy=py+((i*19+seed*7)%Math.max(1,h));pxRect(xx,yy,2+(i%3),1,i%2?"#5e625d":"#85857b")}}
+function curb(y){for(let xx=0;xx<W;xx+=18){pxRect(xx,y,17,7,xx%36?"#99968e":"#c0bbb0");pxRect(xx,y+7,17,3,"#6e6c66")}}
+function windowUnit(px,py,lit=false){pxRect(px,py,25,20,"#3f4644");pxRect(px+2,py+2,21,16,lit?"#d2ad63":"#91b2b0");pxRect(px+11,py+2,2,16,"#56615d");pxRect(px+2,py+9,21,2,"#56615d")}
+function signBoard(px,py,w,label,bg="#efe0a8",fg="#3c342b"){pxRect(px,py,w,19,bg);pxRect(px+3,py+3,w-6,2,"#b59b69");text(label,px+w/2,py+14,8,fg)}
+function awning(px,py,w){pxRect(px,py,w,8,"#d6b477");for(let xx=px;xx<px+w;xx+=16)pxRect(xx,py,8,8,xx%32?"#b95d52":"#eee1c5")}
+function plant(px,py){pxRect(px-2,py,4,18,"#69503b");pxRect(px-10,py-5,9,7,"#3f7147");pxRect(px+2,py-10,10,8,"#4d8050");pxRect(px-5,py-16,9,8,"#355f3c")}
+function scooter(px,py,body="#bd6156"){x.fillStyle="#191d1b";x.fillRect(px,py,33,8);x.fillRect(px+2,py+6,8,7);x.fillRect(px+23,py+6,8,7);x.fillStyle=body;x.fillRect(px+8,py-7,15,9);x.fillRect(px+19,py-12,3,8);x.fillStyle="#d9d0bc";x.fillRect(px+22,py-14,2,6);}
+function tableSet(px,py){pxRect(px,py,30,5,"#6c5143");pxRect(px+4,py+5,4,14,"#6c5143");pxRect(px+22,py+5,4,14,"#6c5143");pxRect(px-6,py+7,10,6,"#a06a51");pxRect(px+26,py+7,10,6,"#a06a51")}
+function facade(b,night){
+  const palettes={room:["#9a7057","#d2a276"],school:["#78917d","#d0c39a"],rice:["#a96f4d","#e0b56f"],office:["#697784","#b6c2c1"],shop:["#8c875c","#d6bf77"],cafe:["#795a51","#c99a70"],park:["#4f774e","#86a866"],bus:["#68726c","#c6ad72"]};
+  let [wall,trim]=palettes[b.id]||[b.col,"#d0b07a"];tileNoise(b.x,b.y,b.w,b.h,wall,b.x+b.y);pxRect(b.x,b.y,b.w,9,trim);pxRect(b.x+4,b.y+9,b.w-8,3,"#5c5147");
+  if(b.id!=="park"){
+    for(let yy=b.y+38;yy<b.y+b.h-47;yy+=35)for(let xx=b.x+10;xx<b.x+b.w-30;xx+=39)windowUnit(xx,yy,night&&((xx+yy)%3!==0));
+    pxRect(b.x+b.w/2-16,b.y+b.h-43,32,43,"#44372f");pxRect(b.x+b.w/2-12,b.y+b.h-39,24,31,"#735946");
+    pxRect(b.x+b.w/2-4,b.y+b.h-22,4,4,"#c7ad77");
+  }
+  if(b.id==="room"){signBoard(b.x+10,b.y+18,86,"CHO THUÊ PHÒNG");awning(b.x+3,b.y+b.h-55,b.w-6);plant(b.x+22,b.y+b.h-8);plant(b.x+b.w-23,b.y+b.h-10);}
+  if(b.id==="school"){signBoard(b.x+22,b.y+17,b.w-44,"TRƯỜNG HỌC","#e5d7a9");pxRect(b.x+10,b.y+b.h-28,b.w-20,5,"#5d675e");}
+  if(b.id==="rice"){signBoard(b.x+8,b.y+17,b.w-16,"CƠM • BÚN • PHỞ","#f0d27e");awning(b.x,b.y+b.h-49,b.w);tableSet(b.x+12,b.y+b.h-23);tableSet(b.x+b.w-42,b.y+b.h-23);}
+  if(b.id==="office"){signBoard(b.x+12,b.y+17,b.w-24,"VĂN PHÒNG","#d8e1df");pxRect(b.x+12,b.y+b.h-29,b.w-24,4,"#4e5960");}
+  if(b.id==="shop"){signBoard(b.x+7,b.y+17,b.w-14,"TẠP HÓA","#f1d178");awning(b.x,b.y+b.h-34,b.w);for(let i=0;i<4;i++)pxRect(b.x+9+i*26,b.y+b.h-22,18,11,["#b34f47","#7d9d6b","#d1a54e","#758ca4"][i]);}
+  if(b.id==="cafe"){signBoard(b.x+13,b.y+18,b.w-26,"CÀ PHÊ 24H","#e0c391");awning(b.x+2,b.y+b.h-43,b.w-4);tableSet(b.x+15,b.y+b.h-27);tableSet(b.x+b.w-52,b.y+b.h-27);plant(b.x+10,b.y+b.h-6);}
+  if(b.id==="bus"){signBoard(b.x+13,b.y+17,b.w-26,"TRẠM XE","#e1d1a4");pxRect(b.x+12,b.y+b.h-26,b.w-24,8,"#4d5550");pxRect(b.x+b.w-30,b.y+b.h-58,20,32,"#555f5c");}
 }
-function closePanel(){panel=false;$("panel").style.display="none";$("choices").innerHTML=""}
-$("closePanel").onclick=closePanel;
-
-function openPhone(){phone=true;$("phone").style.display="flex";stats()}
-function closePhone(){phone=false;$("phone").style.display="none";$("page").className="page";$("page").innerHTML=""}
-$("phoneBtn").onclick=()=>safe(()=>phone?closePhone():openPhone(),"phone");
-document.querySelectorAll(".app").forEach(b=>b.onclick=()=>safe(()=>app(b.dataset.app),"app"));
-function back(){ $("page").className="page";$("page").innerHTML="";$("home").style.display="block" }
-function head(t){return `<div class="head"><span>${t}</span><button class="close" onclick="back()">←</button></div>`}
-function app(id){
- if(id==="close"){closePhone();return}
- $("home").style.display="none";$("page").className="page on";
- if(id==="msg")messages();if(id==="jobs")jobPage();if(id==="social")socialPage();if(id==="dating")datingPage();if(id==="shop")shopPage();
+function drawPark(){tileNoise(32,292,150,156,"#5c8a5b",4);for(let i=0;i<13;i++){let tx=45+(i*43)%125,ty=305+(i*31)%125;pxRect(tx-3,ty+10,6,18,"#69503b");pxRect(tx-11,ty,10,10,"#2f6238");pxRect(tx+2,ty-7,12,11,"#3e7442");pxRect(tx-5,ty-14,10,10,"#315f38");}pxRect(70,410,90,5,"#72533f");pxRect(78,415,5,17,"#72533f");pxRect(147,415,5,17,"#72533f");}
+function drawStreetDetails(night){
+  curb(55);curb(226);curb(460);curb(540);curb(895);
+  x.strokeStyle="#4a433d";x.lineWidth=2;x.beginPath();x.moveTo(0,650);x.lineTo(190,610);x.stroke();for(let i=0;i<7;i++){let px=18+i*25,py=646-i*5;pxRect(px,py,12,16,["#c7a27d","#9b6f62","#7188a1"][i%3]);}
+  // utility poles and layered cables
+  [205,351].forEach((px,i)=>{pxRect(px,20,6,270,"#3d3934");pxRect(px-7,34,20,5,"#504a43");x.strokeStyle="#292826";x.lineWidth=2;x.beginPath();x.moveTo(px,35);x.bezierCurveTo(px+80,65,290,95,520,28+i*22);x.stroke();});
+  // drains
+  for(let y=560;y<645;y+=14){pxRect(0,y,198,5,"#474b48");for(let xx=8;xx<198;xx+=18)pxRect(xx,y,8,2,"#252927");}
+  // street food clutter
+  [[18,570],[170,575],[492,575]].forEach(([px,py])=>{tableSet(px,py);pxRect(px+7,py-12,12,10,"#8b5b3f");pxRect(px+10,py-16,6,5,"#d5b66f");});
+  scooter(185,602,"#b96a58");scooter(328,618,"#6e8597");scooter(487,570,"#c1a35c");
+  // road paint / crossing
+  for(let i=0;i<7;i++)pxRect(205+i*25,228,15,9,"#ddd7c7");
+  signBoard(25,238,72,"HẺM 12","#e4d19b");signBoard(390,238,108,"PHOTOCOPY","#ddd7c7");
+  // bins
+  [[12,602],[520,598],[185,632]].forEach(([px,py])=>{pxRect(px,py,17,22,"#515954");pxRect(px-2,py-3,21,4,"#313633");pxRect(px+4,py+5,9,2,"#7b827d");});
+  // plants and sidewalk life
+  plant(184,650);plant(358,650);plant(516,535);
+  // bus shelter
+  pxRect(390,548,110,5,"#4a514e");pxRect(395,552,5,70,"#4a514e");pxRect(495,552,5,70,"#4a514e");pxRect(400,555,90,55,"#7d8c89aa");signBoard(404,560,55,"BUS","#e5d29c");
+  // moving cars/motorbikes with lights
+  const t=S.mins*1.8;for(let i=0;i<6;i++){let vx=((t*(i%2?1:-1)+i*113)%600)-30,vy=i%2?250:510;let body=["#b85c52","#74869a","#b59a5e","#6d875f"][i%4];pxRect(vx,vy,32,11,body);pxRect(vx+4,vy+11,7,5,"#1d211f");pxRect(vx+21,vy+11,7,5,"#1d211f");pxRect(vx+(i%2?28:0),vy+2,3,3,night?"#f5d982":"#d8cdb5");}
 }
-function messages(){
- $("page").innerHTML=head("💬 Tin nhắn")+`
- <div class="item"><b>Chủ trọ</b><p>“Em nhớ tiền phòng tháng này nhé.”</p><small>08:02</small></div>
- <div class="item"><b>Mai</b><p>“Tối nay đi ăn không?”</p><small>10:15</small></div>
- <div class="item"><b>Khoa</b><p>“Chiều chạy đơn không?”</p><small>11:08</small></div>
- <div class="item"><b>Gia đình</b><p>“Dạo này học hành sao rồi?”</p><small>06:45</small></div>`;
-}
-function jobPage(){
- $("page").innerHTML=head("💼 Tìm việc");
- jobs.forEach(j=>{
-  const locked=j.id==="office"&&!state.inventory.has("phone_good");
-  $("page").innerHTML+=`<div class="item"><b>${j.icon} ${j.name}</b><p>${j.desc}</p><small>${money(j.pay)} / ca • ${j.mins} phút • ${locked?"Cần điện thoại tốt hơn":"Không yêu cầu"}</small><br><button ${locked?"disabled":""} onclick="startJob('${j.id}')">${locked?"Chưa đủ điều kiện":"Nhận ca"}</button></div>`;
- });
-}
-window.startJob=id=>safe(()=>{
- const j=jobs.find(x=>x.id===id);assert(j,"job missing");
- if(id==="office"&&!state.inventory.has("phone_good")){toast("Cần điện thoại tốt hơn.");return}
- if(state.energy<25){toast("Bạn mệt quá.");return}
- closePhone();state.energy=clamp(state.energy-28,0,100);state.mood=clamp(state.mood-2,0,100);advance(j.mins);earn(j.pay);remember("worked_"+id);
- const story=id==="ship"?"Trời nóng. Có đơn mới.":id==="rice"?"Khách đông rồi lại vắng. Cuối ca, chủ quán đưa tiền.":"Màn hình sáng cả buổi. Cuối ca, đồng nghiệp bảo: “Mai gặp.”";
- openPanel(j.icon+" "+j.name,story,[{label:"Hết ca.",action:()=>{}}]);stats();
-},"start-job");
-
-function socialPage(){
- const posts=[
- ["Nguyễn Thảo","“Làm ơn đừng so sánh mình với người khác nữa. Mỗi người một đời.”","2,4K bình luận"],
- ["Đời Sinh Viên","“Đi làm thêm 4 tiếng, về học 3 tiếng, ngủ 5 tiếng. Còn 12 tiếng kia để…?”","1,8K bình luận"],
- ["Một người rất bình thường","“22 tuổi chưa có nhà có xe có bình thường không?”","8,1K bình luận"],
- ["Tuyển dụng 2026","“Yêu cầu: 3 năm kinh nghiệm. Ứng viên: 20 tuổi.”","5,2K bình luận"],
- ["Bạn của bạn","“Cuối tháng rồi. Ai còn tiền cho tôi mượn không?”","327 bình luận"],
- ["Cafe Corner","“Hôm nay trời đẹp. Không làm gì cũng được.”","914 lượt thích"]
- ];
- $("page").innerHTML=head("📱 Mạng xã hội");
- posts.forEach(p=>$("page").innerHTML+=`<div class="feed"><b>${p[0]}</b><p>${p[1]}</p><small>${p[2]}</small></div>`);
-}
-function datingPage(){
- $("page").innerHTML=head("❤️ Hẹn hò");
- dates.forEach(d=>{const m=state.flags["match_"+d.id];$("page").innerHTML+=`<div class="profile"><div class="avatar">${d.emoji}</div><h3>${d.name}, ${d.age}</h3><small>${d.job}</small><p>${d.bio}</p>${m?`<button onclick="dateChat('${d.id}')">💬 Nhắn tin</button>`:`<button onclick="match('${d.id}')">❤️ Kết nối</button>`}</div>`});
-}
-window.match=id=>safe(()=>{const d=dates.find(x=>x.id===id);state.flags["match_"+id]=true;remember("match_"+id);state.mood=clamp(state.mood+3,0,100);toast("Đã kết nối với "+d.name);datingPage()},"match");
-window.dateChat=id=>safe(()=>{const d=dates.find(x=>x.id===id);closePhone();openPanel(d.name,`${d.name}: “Hôm nay thế nào?”`,[
-{label:"“Bình thường. Hơi mệt.”",action:()=>state.mood=clamp(state.mood+2,0,100)},
-{label:"“Đi dạo một chút không?”",action:()=>{state.mood=clamp(state.mood+5,0,100);remember("walk_"+id)}},
-{label:"“Để hôm khác nhé.”",action:()=>{}}
-])},"date-chat");
-
-function shopPage(){
- $("page").innerHTML=head("🛒 Cửa hàng");
- shopItems.forEach(it=>{const owned=state.inventory.has(it.id);$("page").innerHTML+=`<div class="item"><b>${it.icon} ${it.name}</b><p>${it.desc}</p><small>${owned?"Đã có":money(it.price)}</small>${owned?"":`<br><button onclick="buy('${it.id}')">Mua</button>`}</div>`});
-}
-window.buy=id=>safe(()=>{const it=shopItems.find(x=>x.id===id);assert(it,"item missing");if(!spend(it.price))return;state.inventory.add(id);if(id==="food"){state.energy=clamp(state.energy+12,0,100);state.mood=clamp(state.mood+4,0,100)}if(id==="coffee"){state.energy=clamp(state.energy+8,0,100);state.mood=clamp(state.mood+6,0,100)}shopPage();stats()},"buy");
-
-function rect(x,y,w,h,c){ctx.fillStyle=c;ctx.fillRect(Math.round(x),Math.round(y),w,h)}
-function wr(x,y,w,h,c){rect(x-cam.x,y-cam.y,w,h,c)}
-function wt(s,x,y,n,c="#292725"){ctx.fillStyle=c;ctx.font=n+"px system-ui";ctx.fillText(s,Math.round(x-cam.x),Math.round(y-cam.y))}
-function wl(x1,y1,x2,y2,c){ctx.strokeStyle=c;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x1-cam.x,y1-cam.y);ctx.lineTo(x2-cam.x,y2-cam.y);ctx.stroke()}
-
-function tree(x,y){wr(x+7,y+20,6,22,"#66503c");wr(x,y+8,20,20,"#4f7650");wr(x+4,y,14,16,"#6d925c");wr(x+2,y+12,18,13,"#4f7650")}
-function bench(x,y){wr(x,y,38,5,"#735741");wr(x+4,y+5,4,10,"#51402f");wr(x+30,y+5,4,10,"#51402f")}
-function pole(x,y){wr(x,y,4,70,"#464a4b");wr(x-6,y,16,4,"#464a4b");wl(x+2,y+3,x+120,y+24,"#252a2c");wl(x+2,y+10,x+140,y+48,"#252a2c")}
-function win(x,y){wr(x,y,30,26,"#688793");wr(x+4,y+4,22,18,"#b9d1d1");wr(x+14,y,2,26,"#56666b")}
-
 function drawWorld(){
- const daylight=clamp(Math.sin(((state.minutes-360)/1080)*Math.PI),0,1);
- ctx.fillStyle=`rgb(${48+daylight*100|0},${64+daylight*92|0},${82+daylight*86|0})`;ctx.fillRect(0,0,360,640);
- // distant buildings
- for(let i=0;i<14;i++){let x=i*92-(cam.x*.12%92),h=35+(i*19%75);rect(x,165-h,64,h,"#4f5a60");for(let q=0;q<4;q++)if((i+q)%2===0)rect(x+9+(q%2)*20,174-h+(q>1?20:0),7,8,daylight>.35?"#d6bd6c":"#71848e")}
- wr(0,170,1120,1510,"#b8aa90");wr(0,500,1120,55,"#82976e");wr(0,950,1120,65,"#82976e");wr(0,1490,1120,90,"#7e956a");
- wr(0,735,1120,190,"#44494b");wr(325,0,190,1680,"#44494b");wr(640,0,175,1680,"#44494b");wr(0,1020,1120,90,"#4d5254");
- wr(0,710,1120,25,"#a89d89");wr(0,925,1120,25,"#a89d89");wr(300,0,25,1680,"#a89d89");wr(515,0,25,1680,"#a89d89");wr(615,0,25,1680,"#a89d89");wr(815,0,25,1680,"#a89d89");
- for(let x=0;x<1120;x+=52)wr(x,830,30,4,"#d4c46a");for(let y=0;y<1680;y+=52){wr(420,y,4,29,"#d4c46a");wr(727,y,4,29,"#d4c46a")}
- for(let x=0;x<1120;x+=30){wr(x,932,20,3,"#2e3335");wr(x,1105,20,3,"#2e3335")}
- drawBuildings();drawProps();drawCars();drawNpcs();drawPlayer();
- if(state.flags.rain){ctx.fillStyle="#b8d7e955";for(let i=0;i<70;i++){rect((i*47+frame*2)%360,(i*83+frame*5)%640,1,8,"#b8d7e955")}}
+ const night=S.mins>=1110||S.mins<390; const dawn=S.mins>=330&&S.mins<420;
+ x.fillStyle=night?"#26333b":dawn?"#b9aaa0":"#8eaaa4";x.fillRect(0,0,W,H);
+ // pixel tiled ground instead of flat fill
+ for(let yy=0;yy<H;yy+=16)for(let xx=0;xx<W;xx+=16){let alt=((xx/16+yy/16)%3===0);pxRect(xx,yy,16,16,alt?(night?"#545b57":"#777871"):(night?"#5d625e":"#82837b"));}
+ // main asphalt roads
+ tileNoise(200,0,185,H,night?"#2e3432":"#454945",7);tileNoise(0,225,W,55,night?"#303633":"#4c504b",9);tileNoise(0,485,W,55,night?"#303633":"#4c504b",12);tileNoise(0,650,W,30,night?"#303633":"#4c504b",15);
+ drawStreetDetails(night);
+ buildings.forEach(b=>{if(b.id==="park")drawPark();else facade(b,night)});
+ // road center lines
+ x.strokeStyle="#d1bf72";x.lineWidth=2;x.setLineDash([14,18]);x.beginPath();x.moveTo(292,0);x.lineTo(292,H);x.stroke();x.setLineDash([]);
+ // rain / wet reflections
+ if(S.rain){x.fillStyle="#6f899055";for(let i=0;i<75;i++){let rx=(i*71+S.mins*3)%W,ry=(i*37+S.mins*5)%H;pxRect(rx,ry,1,7,"#b7d2d2");}x.fillStyle="#8da9aa33";x.fillRect(0,0,W,H);}
+ // characters and living world
+ npc.forEach(n=>{let bx=n.x,by=n.y;if(n.id==="mai"){bx=125+Math.sin(S.mins/18)*25;by=250}if(n.id==="linh"){bx=425;by=520+Math.sin(S.mins/20)*15}if(n.id==="khoa"){bx=115+Math.sin(S.mins/14)*18;by=590}drawChar(bx,by,n.color,n.name,false,n.id);});
+ drawChar(S.player.x,S.player.y,"#d99a67","Bạn",true,"player");
+ // cinematic vignette / scene depth
+ x.fillStyle=night?"#07101622":"#fff5e322";x.fillRect(0,0,W,22);x.fillRect(0,H-20,W,20);
 }
-function drawBuildings(){
- buildings.forEach(b=>{
-  wr(b.x+5,b.y+8,b.w,b.h,"#6b655b");wr(b.x,b.y,b.w,b.h,b.id==="room"?"#cda77f":"#c7bfb0");wr(b.x-5,b.y-8,b.w+10,10,b.id==="room"?"#5b433f":"#5e5750");
-  wr(b.x+10,b.y+12,Math.min(150,b.w-20),19,"#24272b");wt(b.tag,b.x+17,b.y+26,10,"#f5e6c7");
-  if(b.id==="room")for(let y=b.y+52;y<b.y+b.h-30;y+=50)win(b.x+20,y);
-  if(b.id==="school"){wr(b.x+20,b.y+55,b.w-40,95,"#d7d0c3");for(let x=b.x+32;x<b.x+b.w-40;x+=46)win(x,b.y+70);wr(b.x+85,b.y+160,115,35,"#aa9f8b");wt("SÂN TRƯỜNG",b.x+105,b.y+182,9)}
-  if(b.id==="rice"){wr(b.x+14,b.y+50,b.w-28,70,"#d7a05a");wr(b.x+25,b.y+61,65,43,"#684c3d");wr(b.x+105,b.y+61,88,43,"#eee3cf");wr(b.x+30,b.y+138,b.w-60,17,"#4d3e34")}
-  if(b.id==="shop"){wr(b.x+15,b.y+50,b.w-30,112,"#eceee8");for(let x=b.x+25;x<b.x+b.w-20;x+=45){wr(x,b.y+62,32,8,"#df9b54");wr(x,b.y+79,32,8,"#668d70");wr(x,b.y+96,32,8,"#cb655c");wr(x,b.y+113,32,8,"#788fb0")}}
-  if(b.id==="office"){wr(b.x+15,b.y+50,b.w-30,145,"#d6dbd5");for(let y=b.y+64;y<b.y+185;y+=38)for(let x=b.x+25;x<b.x+b.w-30;x+=62){wr(x,y,42,17,"#6f655d");wr(x+8,y-5,26,8,"#354650")}}
-  if(b.id==="cafe"){wr(b.x+15,b.y+50,b.w-30,110,"#80634d");for(let x=b.x+28;x<b.x+b.w-30;x+=58){wr(x,b.y+70,40,24,"#c3b08f");wr(x+6,b.y+76,28,12,"#54726e")}}
-  if(b.id==="park"){for(let i=0;i<5;i++)tree(b.x+30+i*45,b.y+60+(i%2)*65);for(let x=b.x+28;x<b.x+b.w-30;x+=70)bench(b.x+x,b.y+b.h-55)}
- });
+function drawChar(px,py,col,name,player=false,id="npc"){
+ const bob=Math.round(Math.sin(performance.now()/170+px)*1.2),step=Math.round(Math.sin(performance.now()/120+py));
+ // shadow
+ pxRect(px-10,py+24+bob,20,4,"#20221f88");
+ // legs / shoes
+ const pants=player?"#315e78":["#4e4a45","#5b5050","#52604f","#4d5662"][Math.abs(id.length)%4];pxRect(px-7,py+12+bob,6,13,"#3a3532");pxRect(px+1,py+12+bob,6,13,"#3a3532");pxRect(px-8+step,py+24+bob,7,3,"#242523");pxRect(px+1-step,py+24+bob,7,3,"#242523");
+ // body / arms
+ pxRect(px-9,py+3+bob,18,16,player?pants:col);pxRect(px-12,py+7+bob,3,11,"#d99a67");pxRect(px+9,py+7+bob,3,11,"#d99a67");
+ // head, hair, face
+ pxRect(px-8,py-10+bob,16,15,"#d99a67");pxRect(px-8,py-12+bob,16,5,player?"#252a2a":"#3b302a");pxRect(px-10,py-8+bob,3,7,player?"#252a2a":"#3b302a");
+ pxRect(px-5,py-4+bob,2,2,"#2b2724");pxRect(px+3,py-4+bob,2,2,"#2b2724");pxRect(px-2,py+2+bob,5,1,"#704a3e");
+ // distinct accessory by NPC
+ if(id==="mai")pxRect(px+7,py-9+bob,4,9,"#b44d5a");
+ if(id==="linh")pxRect(px-12,py-3+bob,4,9,"#282a2a");
+ if(id==="khoa")pxRect(px-10,py-13+bob,20,3,"#a26b42");
+ if(id==="nam")pxRect(px-8,py+4+bob,16,3,"#343b44");
+ if(id==="sau")pxRect(px-9,py-14+bob,18,4,"#817060");
+ text(name,px,py-18+bob,8,"#f5e4bc");
 }
-function drawProps(){pole(42,430);pole(1030,430);pole(290,1040);pole(850,1040);for(let x=20;x<1120;x+=105)if(x%210<110)tree(x,650);wr(20,600,70,18,"#f2d35f");wt("CHO THUÊ",25,613,8);wr(1010,1050,60,18,"#e7e0c9");wt("HẺM 12",1017,1063,8)}
-const cars=[{x:130,y:885,v:.55,c:"#bb4e45"},{x:570,y:895,v:-.42,c:"#5d83a5"},{x:860,y:880,v:.48,c:"#6f936a"}];
-function car(x,y,c){wr(x,y,43,14,c);wr(x+8,y-6,22,7,c);wr(x+12,y-5,8,5,"#78939e");wr(x+22,y-5,6,5,"#78939e");wr(x+5,y+11,7,6,"#25292b");wr(x+31,y+11,7,6,"#25292b")}
-function drawCars(){cars.forEach(v=>{v.x+=v.v;if(v.x>1120)v.x=-60;if(v.x<-60)v.x=1120;car(v.x,v.y,v.c)})}
-function drawNpcs(){npcs.forEach((n,i)=>{let x=n.x-cam.x,y=n.y-cam.y+Math.sin(performance.now()*.003+i)*.6;ctx.fillStyle="#0003";ctx.fillRect(x-8,y+23,17,4);ctx.fillStyle=["#d6a14c","#4d80a2","#c66a55","#74728e","#776653","#bd7c91"][i];ctx.fillRect(x-6,y+4,12,18);ctx.fillStyle="#edbf98";ctx.fillRect(x-5,y-6,10,10);ctx.fillStyle="#292629";ctx.fillRect(x-5,y-8,10,4)})}
-function drawPlayer(){let x=player.x-cam.x,y=player.y-cam.y+Math.sin(player.anim)*.5;ctx.fillStyle="#0003";ctx.fillRect(x-8,y+27,17,4);ctx.fillStyle=state.inventory.has("tee")?"#5b7891":"#355f85";ctx.fillRect(x-7,y+5,14,20);ctx.fillStyle="#efc29a";ctx.fillRect(x-6,y-6,12,11);ctx.fillStyle="#28272b";ctx.fillRect(x-6,y-8,12,4);ctx.fillStyle="#292d30";ctx.fillRect(x-5,y+25,4,5);ctx.fillRect(x+2,y+25,4,5)}
-
-function blocked(x,y){if(x<12||y<185||x>1108||y>1668)return true;for(const b of buildings){if(b.id==="park")continue;if(x+7>b.x&&x-7<b.x+b.w&&y+10>b.y&&y-10<b.y+b.h)return true}return false}
-function move(dt){let dx=(keys.right?1:0)-(keys.left?1:0),dy=(keys.down?1:0)-(keys.up?1:0);if(dx||dy){let l=Math.hypot(dx,dy);dx/=l;dy/=l;let sp=player.speed*(dt/16.67),nx=player.x+dx*sp,ny=player.y+dy*sp;if(!blocked(nx,player.y))player.x=nx;if(!blocked(player.x,ny))player.y=ny;player.anim+=.35}cam.x=clamp(player.x-180,0,760);cam.y=clamp(player.y-320,150,1040)}
-
-function nearest(){
- let best=null,d=60;
- for(const b of buildings){let x=b.x+b.w/2,y=b.y+b.h/2,dd=Math.hypot(player.x-x,player.y-y);if(dd<Math.max(65,Math.min(b.w,b.h)*.5)&&dd<d){best={kind:"building",data:b};d=dd}}
- for(const n of npcs){let dd=Math.hypot(player.x-n.x,player.y-n.y);if(dd<58&&dd<d){best={kind:"npc",data:n};d=dd}}
- return best;
+function loop(){drawWorld();document.getElementById("day").textContent=`Ngày ${S.day} · ${timeStr()}`;document.getElementById("money").textContent=money(S.money);document.getElementById("energy").textContent="⚡ "+S.energy;document.getElementById("mood").textContent=(S.mood>65?"😄":S.mood>40?"🙂":"😵")+" "+S.mood;document.getElementById("place").textContent=placeName();document.getElementById("debug").textContent=`FPS-ish · ${S.place} · ${Math.round(S.player.x)},${Math.round(S.player.y)} · err:${S.errors}`;requestAnimationFrame(loop)}
+function placeName(){return ({room:"Phòng trọ",school:"Trường học",rice:"Quán cơm",office:"Văn phòng",shop:"Tạp hóa",cafe:"Cà phê",park:"Công viên",street:"Đường phố"})[S.place]||"Đường phố"}
+function panel(title,html){document.getElementById("ptitle").textContent=title;document.getElementById("pbody").innerHTML=html;document.getElementById("panel").classList.add("show")}
+function closePanel(){document.getElementById("panel").classList.remove("show")}
+function journal(){panel('📒 Sổ đời', `<div class="card"><b>Ngày ${S.day}</b><p class="muted">Tiền: ${money(S.money)} · Năng lượng: ${S.energy} · Tâm trạng: ${S.mood}</p></div><div class="card"><b>Quan hệ</b>${npc.map(n=>`<div class="row"><span>${n.name}</span><span>${S.rel[n.id]||0}%</span></div>`).join('')}</div><div class="card"><b>Đồ đã mua</b><p class="muted">${(S.inventory||[]).join(', ')||'Chưa có'}</p></div>`)}
+function phone(){
+ panel("📱 Điện thoại",`<div class="card"><b>Pin 68%</b><div class="muted">Thiết bị cũ nhưng vẫn đủ sống.</div></div>
+ <div class="card"><div class="row"><b>💬 Tin nhắn</b><button class="action" data-app="messages">Mở</button></div></div>
+ <div class="card"><div class="row"><b>❤️ Hẹn hò</b><button class="action" data-app="dating">Mở</button></div></div>
+ <div class="card"><div class="row"><b>💼 Tìm việc</b><button class="action" data-app="jobs">Mở</button></div></div>
+ <div class="card"><div class="row"><b>📰 Mạng xã hội</b><button class="action" data-app="social">Lướt</button></div></div>
+ <div class="card"><div class="row"><b>🛒 Cửa hàng</b><button class="action" data-app="shop">Mua</button></div></div><div class="card"><div class="row"><b>📒 Sổ đời</b><button class="action" data-app="journal">Xem</button></div></div>`)}
+function messages(){
+ const ids=["mai","linh","khoa","nam"];panel("💬 Tin nhắn",ids.map(id=>{let n=npc.find(a=>a.id===id),last=S.messages[id].at(-1);return `<div class="card"><div class="row"><b>${n.name}</b><span class="muted">${S.rel[id]||0}% thân</span></div><div class="muted">${last?last.reply:"Chưa có tin nhắn"}</div><button class="action" data-chat="${id}">Nhắn tin</button></div>`}).join(""))}
+function chat(id){
+ let n=npc.find(a=>a.id===id),history=S.messages[id]||[];
+ panel("💬 "+n.name,`<div class="chat" id="chatbox">${history.map(m=>`<div class="msg me">${esc(m.me)}</div><div class="msg npc">${esc(m.reply)}${m.source==='openai'?'<div class="muted" style="margin-top:4px">AI NPC</div>':''}</div>`).join("")||`<div class="muted">Bạn và ${n.name} chưa nói chuyện. Hãy thử nhắn một câu tự nhiên.</div>`}</div>
+ <form id="chatform" style="display:flex;gap:6px;margin-top:12px"><textarea id="chatinput" placeholder="Nhắn gì đó..."></textarea><button class="action">Gửi</button></form>`);
+ document.getElementById("chatform").onsubmit=async e=>{e.preventDefault();let input=document.getElementById("chatinput"),v=input.value.trim();if(!v)return;input.disabled=true;let r=await aiReply(n,v,id);S.messages[id].push({me:v,reply:r.reply,source:r.source});S.rel[id]=clamp((S.rel[id]||0)+(r.relationshipDelta||1),0,100);if(r.memory)S.flags["memory_"+id]=r.memory;S.mood=clamp(S.mood+1,0,100);save();chat(id)}
 }
-function interact(){const h=nearest();if(!h){toast("Không có gì để tương tác ở đây.");return}if(h.kind==="npc")talk(h.data);else building(h.data)}
-function talk(n){
- remember("met_"+n.id);
- let c=[];
- if(n.id==="mai"){c=[{label:"“Học chưa?”",action:()=>state.mood=clamp(state.mood+2,0,100)},{label:"“Đi ăn không?”",action:()=>state.mood=clamp(state.mood+4,0,100)}]}
- else if(n.id==="lan"){c=[{label:"“Cho con một phần cơm. 35.000đ”",action:()=>{if(spend(35000)){state.energy=clamp(state.energy+18,0,100);state.mood=clamp(state.mood+5,0,100)}}},{label:"“Con chỉ ghé hỏi chuyện thôi.”",action:()=>remember("lan_chat")}]}
- else c=[{label:"“Ừ. Ai cũng có một ngày như vậy.”",action:()=>state.mood=clamp(state.mood+2,0,100)},{label:"“Thôi, mình đi trước.”",action:()=>{}}];
- openPanel(n.name,n.line,c);
+function esc(s){return s.replace(/[&<>"']/g,a=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[a]))}
+async function aiReply(n,msg,id){
+  const history=(S.messages[id]||[]).slice(-10).map(m=>({me:m.me,reply:m.reply}));
+  try{
+    const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({npcId:id,message:msg,history,relationship:S.rel[id]||0,mood:S.mood})});
+    if(!r.ok)throw Error('AI backend unavailable');
+    const data=await r.json();return {reply:data.reply||'Ừ, tôi đang nghĩ... :))',source:data.source||'openai',memory:data.memory,relationshipDelta:Number(data.relationshipDelta)||1};
+  }catch(e){
+    const q=msg.toLowerCase(),name=n.name;
+    let reply;
+    if(/chào|hello|hi/.test(q)) reply=name==='Mai'?'Ủa nay chủ động chào tôi luôn à :)) Có chuyện gì khai mau.':'Chào :)) Hôm nay sống ổn không?';
+    else if(/mệt|buồn|stress|chán/.test(q)) reply=id==='linh'?'Mệt thì nghỉ một chút đi. Đời chưa chạy mất đâu.':'Than thì tôi nghe, nhưng nhớ ăn uống nhé. Đừng biến mình thành nhân vật nền.';
+    else if(/đẹp|xinh|thích/.test(q)) reply=id==='mai'?'Nịnh ít thôi :)) Nhưng... nghe cũng được.':'Nói câu này với bao nhiêu người rồi?';
+    else if(/đi chơi|cà phê|gặp/.test(q)) reply=(S.rel[id]||0)>35?'Được. Nhưng ông/bà định bao tôi hay tôi phải tự cứu ví mình? :))':'Mới nói chuyện mà rủ nhanh vậy :))';
+    else if(/tiền|giàu|lương/.test(q)) reply='Nếu biết cách làm giàu bằng tin nhắn thì tôi đã không ngồi đây chat rồi :))';
+    else if(q.includes('?')) reply='Câu hỏi hay đấy. Nhưng tôi cũng chưa dễ khai vậy đâu :))';
+    else reply=['Nghe hợp lý đấy, nhưng tôi chưa bị thuyết phục đâu :))','Ông/bà nói cũng có lý. Có điều đời thường không hoạt động tử tế thế.','Câu này nghe giống người vừa nghĩ ra lúc 2 giờ sáng :))','Tôi ghi nhận. Nhưng tôi sẽ châm biếm chuyện này sau.'][Math.floor(Math.random()*4)];
+    return {reply,source:'local-fallback',memory:null,relationshipDelta:reply.includes('=)')?2:1};
+  }
 }
-function building(b){
- if(b.id==="room")openPanel("🏠 Phòng trọ","Căn phòng nhỏ. Quạt quay, điện thoại nằm trên giường.",[
- {label:"📱 Mở điện thoại",action:openPhone},{label:"💤 Nghỉ 30 phút",action:()=>{advance(30);state.energy=clamp(state.energy+10,0,100);state.mood=clamp(state.mood+2,0,100);stats()}},
- {label:"🚪 Ra khu phố",action:()=>{player.x=320;player.y=520}}]);
- else if(b.id==="rice")openPanel("🍚 Quán cơm","Mùi cơm nóng bay ra vỉa hè.",[
- {label:"🍚 Ăn một phần - 35.000đ",action:()=>{if(spend(35000)){state.energy=clamp(state.energy+18,0,100);state.mood=clamp(state.mood+5,0,100)}}},
- {label:"💼 Xem việc làm",action:()=>{openPhone();setTimeout(()=>app("jobs"),30)}}]);
- else if(b.id==="shop")openPanel("🛒 Cửa hàng","Đồ bình thường. Giá bình thường. Có những thứ mua rồi mới thấy cần.",[{label:"📱 Mở cửa hàng",action:()=>{openPhone();setTimeout(()=>app("shop"),30)}}]);
- else if(b.id==="cafe")openPanel("☕ Quán cà phê","Không cần làm gì cả.",[{label:"☕ Cà phê - 25.000đ",action:()=>{if(spend(25000)){state.energy=clamp(state.energy+8,0,100);state.mood=clamp(state.mood+7,0,100)}}},{label:"🪑 Ngồi 20 phút",action:()=>{advance(20);state.mood=clamp(state.mood+6,0,100);state.energy=clamp(state.energy-3,0,100)}}]);
- else if(b.id==="park")openPanel("🌳 Công viên","Một chiếc ghế đá. Một buổi chiều. Không có mục tiêu.",[{label:"🪑 Ngồi nhìn phố 20 phút",action:()=>{advance(20);state.mood=clamp(state.mood+8,0,100)}}]);
- else if(b.id==="school")openPanel("🎓 Trường đại học","Đi học không phải mini-game. Chỉ là một phần của ngày.",[{label:"📚 Vào học 120 phút",action:()=>{advance(120);state.energy=clamp(state.energy-18,0,100);remember("study")}}]);
- else if(b.id==="office")openPanel("💻 Văn phòng","Nơi có máy lạnh, email và deadline.",[{label:"💼 Xem việc làm",action:()=>{openPhone();setTimeout(()=>app("jobs"),30)}}]);
-}
-
-function update(dt){if(!panel&&!phone)move(dt);const h=nearest();$("action").style.display=h&&!panel&&!phone?"block":"none";stats()}
-function render(){drawWorld();frame++}
-function loop(now){try{let dt=Math.min(50,now-last);last=now;update(dt);render();requestAnimationFrame(loop)}catch(e){fail(e,"game-loop")}}
-
-function bind(id,key){const e=$(id),on=x=>{x.preventDefault();keys[key]=true},off=x=>{x.preventDefault();keys[key]=false};e.addEventListener("pointerdown",on);["pointerup","pointercancel","pointerleave"].forEach(ev=>e.addEventListener(ev,off))}
-bind("up","up");bind("down","down");bind("left","left");bind("right","right");
-window.addEventListener("keydown",e=>{if(e.key==="ArrowUp"||e.key==="w")keys.up=true;if(e.key==="ArrowDown"||e.key==="s")keys.down=true;if(e.key==="ArrowLeft"||e.key==="a")keys.left=true;if(e.key==="ArrowRight"||e.key==="d")keys.right=true;if(e.key===" "&&!panel&&!phone)interact();if(e.key==="Escape"){closePanel();closePhone()}});
-window.addEventListener("keyup",e=>{if(e.key==="ArrowUp"||e.key==="w")keys.up=false;if(e.key==="ArrowDown"||e.key==="s")keys.down=false;if(e.key==="ArrowLeft"||e.key==="a")keys.left=false;if(e.key==="ArrowRight"||e.key==="d")keys.right=false});
-$("action").onclick=()=>safe(interact,"interaction");
-$("debugBtn").onclick=()=>{$("debug").style.display=$("debug").style.display==="block"?"none":"block"};
-
-setInterval(()=>safe(()=>{
- assert(Number.isFinite(state.money)&&state.money>=0,"money invalid");
- assert(Number.isFinite(state.energy)&&state.energy>=0&&state.energy<=100,"energy invalid");
- assert(Number.isFinite(state.mood)&&state.mood>=0&&state.mood<=100,"mood invalid");
- assert(Number.isFinite(player.x)&&Number.isFinite(player.y),"player position invalid");
- assert(buildings.length===7,"building count invalid");
- assert(npcs.length>=6,"NPC count invalid");
- assert(jobs.length===3,"job count invalid");
-},"integrity"),3000);
-
-function boot(){safe(()=>{
- assert(canvas&&ctx,"Canvas unavailable");assert(buildings.every(b=>b.w>0&&b.h>0),"building dimensions invalid");
- $("boot").style.display="none";$("hud").style.display="block";$("controls").style.display="block";$("phoneBtn").style.display="block";stats();requestAnimationFrame(loop);
-},"boot")}
-boot();
+function dating(){panel("❤️ Hẹn hò",npc.filter(n=>["mai","linh"].includes(n.id)).map(n=>`<div class="card"><div class="row"><b>${n.name}</b><span>${S.rel[n.id]}%</span></div><div class="muted">${n.tone}</div><button class="action" data-chat="${n.id}">Nhắn tin</button></div>`).join(""))}
+function jobs(){panel("💼 Tìm việc",[
+["shipper","🛵 Shipper","Chạy đơn, 90 phút · +180.000đ"],
+["rice","🍚 Nhân viên quán cơm","Phục vụ, 120 phút · +220.000đ"],
+["office","💻 Nhân viên văn phòng","Ca hành chính, 180 phút · +320.000đ"]
+].map(j=>`<div class="card"><b>${j[1]}</b><div class="muted">${j[2]}</div><button class="action" data-job="${j[0]}">Nhận ca</button></div>`).join(""))}
+function takeJob(job){S.job=job;let mins=job==="shipper"?90:job==="rice"?120:180,pay=job==="shipper"?180000:job==="rice"?220000:320000;advance(mins);S.money+=pay;S.energy=clamp(S.energy-12,0,100);S.mood=clamp(S.mood+(job==="office"?-2:2),0,100);toast(`Hoàn thành ca: +${money(pay)}`);save();closePanel()}
+function social(){let posts=[["@nguoila","Lương 8 triệu, thuê trọ 4 triệu, tiền ăn 2 triệu. Phần còn lại dành để... suy nghĩ.","1,2k"],["@thanhpho","Tin nóng: người trẻ phát hiện ngủ đủ 8 tiếng là một truyền thuyết đô thị.","842"],["@anhban","Bạn bè đăng ảnh du lịch. Tôi đăng ảnh hóa đơn điện.","2,1k"],["@meocon","Có những ngày chỉ cần cơm nóng, wifi ổn và không ai hỏi 'bao giờ lấy chồng/lấy vợ'.","3,4k"]];panel("📰 Mạng xã hội",posts.map(p=>`<div class="card"><b>${p[0]}</b><p>${p[1]}</p><div class="muted">💬 ${p[2]} lượt tương tác</div></div>`).join(""))}
+function shop(){panel("🛒 Cửa hàng",[["mì","🍜 Mì gói",12000],["coffee","☕ Cà phê",18000],["rain","☔ Áo mưa",45000],["shirt","👕 Áo thun",90000],["charger","🔌 Cáp sạc",70000],["phone2","📱 Điện thoại tốt hơn",350000]].map(a=>`<div class="card"><div class="row"><b>${a[1]}</b><span>${money(a[2])}</span></div><button class="action" data-buy="${a[0]}" data-price="${a[2]}">Mua</button></div>`).join(""))}
+function buy(id,p){p=Number(p);if(S.money<p){toast("Ví không đủ tiền.");return}S.money-=p;S.inventory.push(id);S.mood=clamp(S.mood+2,0,100);toast("Đã mua.");save()}
+function interact(){let target=npc.find(n=>near(S.player,n,75));if(target){chat(target.id);return}let b=buildingAt(S.player.x,S.player.y);if(b){S.place=b.id; if(b.id==="room")toast("Phòng trọ: ngủ, ăn, dùng điện thoại.");else toast("Đang ở "+b.label.toLowerCase()+". Mở điện thoại để xem việc/sự kiện.");return}toast("Không có gì đặc biệt ở đây. Nhưng cứ đi tiếp.")}
+function goHome(){S.place="room";S.player.x=270;S.player.y=760;toast("Về phòng trọ.");save()}
+document.getElementById("phone").onclick=phone;document.getElementById("interact").onclick=interact;document.getElementById("home").onclick=goHome;document.getElementById("close").onclick=closePanel;
+document.getElementById("pbody").addEventListener("click",e=>{let b=e.target.closest("button");if(!b)return;if(b.dataset.app==="messages")messages();if(b.dataset.app==="dating")dating();if(b.dataset.app==="jobs")jobs();if(b.dataset.app==="social")social();if(b.dataset.app==="shop")shop();if(b.dataset.chat)chat(b.dataset.chat);if(b.dataset.job)takeJob(b.dataset.job);if(b.dataset.buy)buy(b.dataset.buy,b.dataset.price)});
+document.querySelectorAll(".pad .btn").forEach(b=>b.addEventListener("pointerdown",()=>{let cl=b.classList;if(cl.contains("up"))move(0,-1);if(cl.contains("down"))move(0,1);if(cl.contains("left"))move(-1,0);if(cl.contains("right"))move(1,0)}));
+addEventListener("keydown",e=>{keys[e.key.toLowerCase()]=1;if(e.key==="e")interact();if(e.key==="p")phone()});addEventListener("keyup",e=>keys[e.key.toLowerCase()]=0);
+setInterval(()=>{let dx=(keys.d||keys.arrowright?1:0)-(keys.a||keys.arrowleft?1:0),dy=(keys.s||keys.arrowdown?1:0)-(keys.w||keys.arrowup?1:0);if(dx||dy)move(dx,dy)},30);
+function integrity(){try{if(buildings.length<8||npc.length<8)throw Error('world_registry');if(!Number.isFinite(S.money)||S.money<0)throw Error("money");if(!Number.isFinite(S.player.x)||!Number.isFinite(S.player.y))throw Error("player");if(buildings.length<8||npc.length<8)throw Error("world");if(S.energy<0||S.energy>100)throw Error("energy")}catch(e){S.errors++;console.error(e);toast("Đã tự phát hiện lỗi trạng thái.");}}
+load();setInterval(integrity,3000);loop();
+})();
 </script>
-</body>
-</html>
+</body></html>

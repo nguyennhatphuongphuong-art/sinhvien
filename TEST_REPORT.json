@@ -1,23 +1,23 @@
 {
-  "version": "V1.0-SINGLE-FILE",
+  "version": "4.0.0",
   "checks": {
     "doctype": true,
     "single_canvas": true,
-    "no_img_tags": true,
-    "no_background_images": true,
-    "three_jobs": true,
-    "six_npcs": true,
-    "phone_apps": true,
-    "error_handlers": true,
-    "integrity_watch": true,
-    "collision": true,
-    "camera": true,
-    "touch_controls": true
+    "no_img": true,
+    "no_background_image": true,
+    "phone": true,
+    "messages": true,
+    "dating": true,
+    "jobs": true,
+    "shop": true,
+    "journal": true,
+    "integrity": true,
+    "backend_fetch": true,
+    "8_npc": true,
+    "8_locations": true
   },
-  "node_syntax": {
-    "available": true,
-    "ok": true,
-    "stderr": ""
-  },
-  "file_bytes": 28470
+  "javascript_syntax": "pass",
+  "server_syntax": "pass",
+  "server_smoke": "pass",
+  "chat_fallback": "pass"
 }
